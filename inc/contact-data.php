@@ -65,7 +65,7 @@ add_action( 'rest_api_init', function () {
 	register_rest_route( 'palm-code/v1', '/contact-data', array(
 		'methods' => 'POST',
 		'callback' => 'palm_code_save_contact_data',
-		'premission_callback' => '__return_true'
+		'permission_callback' => '__return_true'
 	) );
 } );
 
