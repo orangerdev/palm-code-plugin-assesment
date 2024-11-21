@@ -84,7 +84,16 @@ function palm_code_save_contact_data( WP_REST_Request $request ) {
 
 	try {
 
-		if ( ! $name || ! $email || ! $phone || ! $service ) {
+		// filter all the fields
+		$name = sanitize_text_field( $name );
+		$email = sanitize_email( $email );
+		$phone = sanitize_text_field( $phone );
+		$service = sanitize_text_field( $service );
+		$message = sanitize_text_field( $message );
+		$file_url = esc_url( $file_url );
+
+		// validate all the fields
+		if ( ! $name || ! is_email( $email ) || ! $phone || ! $service ) {
 			return new WP_REST_Response( array( 'message' => 'Name, Email, Phone and Service are required' ), 400 );
 		}
 
